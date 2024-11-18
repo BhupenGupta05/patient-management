@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    box-sizing: border-box;
+}
+
+.btn-class {
+    @apply bg-indigo-600 text-white px-6 py-2 rounded-md hover:bg-indigo-700 transition-all duration-300
+}
+
+
+/* Remove outline and border for focused cells */
+.ag-theme-quartz .ag-cell:focus,
+.ag-theme-quartz .ag-cell:active,
+.ag-theme-quartz .ag-cell {
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Optional: Remove any hover state if present */
+.ag-theme-quartz .ag-cell:hover {
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
