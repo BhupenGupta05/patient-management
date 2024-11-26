@@ -14,7 +14,7 @@ const Success = () => {
     navigate(`/patient/${appointmentData.patientId}/appointment`, { state: { patientId: appointmentData.patientId } });
   }
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 py-8 px-4">
+    <main className="min-h-screen flex flex-col items-center justify-center bg-gray-50 py-8 px-4">
       <h2 className="text-3xl font-bold text-indigo-600 mb-4">WeCare</h2>
 
 
@@ -39,7 +39,7 @@ const Success = () => {
       <div className="mt-6">
         <Copyright />
       </div>
-    </div>
+    </main>
   );
 };
 

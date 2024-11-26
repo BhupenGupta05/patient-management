@@ -82,28 +82,13 @@ const Home = () => {
                     />
 
                     {/* Phone Number Field */}
-                    <div className="mb-6">
-                        <label
-                            htmlFor="mobileNumber"
-                            className="block text-gray-700 text-sm font-bold mb-2"
-                        >
-                            Mobile Number
-                        </label>
-                        <PhoneInput
-                            country={"us"}
-                            value={formFields.phoneNumber}
-                            onChange={handlePhoneChange}
-                            enableSearch={true}
-                            inputClass="bg-transparent w-full outline-none p-4" // adjusted padding for better spacing
-                            containerClass="w-full"
-                            buttonClass="border-none"
-                            inputProps={{
-                                name: "phoneNumber",
-                                required: true,
-                                style: { width: "100%" },
-                            }}
-                        />
-                    </div>
+                    <CustomInput
+                        label="Mobile Number"
+                        name="phoneNumber"
+                        value={formFields.phoneNumber}
+                        onChange={handlePhoneChange}
+                        type="phone"
+                        required />
 
                     {/* Submit Button */}
                     <div className="flex justify-center items-center w-full mb-8">
@@ -123,3 +108,7 @@ const Home = () => {
 };
 
 export default Home;
+
+
+
+

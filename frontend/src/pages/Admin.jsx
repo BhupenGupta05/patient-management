@@ -128,6 +128,8 @@ const Admin = () => {
 
 
   const filteredData = useMemo(() => {
+    console.log(data);
+    
     if (data) {
       return data.map((patient) => {
         const firstAppointment = patient.appointments; 

@@ -19,3 +19,4 @@ const AppointmentDetails = ({appointmentData}) => {
 };
 
 export default AppointmentDetails;
+

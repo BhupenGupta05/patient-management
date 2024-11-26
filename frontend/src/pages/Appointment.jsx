@@ -1,21 +1,28 @@
+import Copyright from '../components/Copyright'
 import AppointmentForm from '../components/AppointmentForm'
 import React from 'react'
+import Title from '../components/Title';
 
 const Appointment = ({ type, patient, onClose }) => {
+    const title = "WeCare";
+    const heading =
+        type === "cancel"
+            ? "Cancel Appointment"
+            : type === "schedule"
+            ? "Schedule Appointment"
+            : "New Appointment";
+    const subheading =
+        type === "cancel"
+            ? "Please fill in the details to cancel your appointment."
+            : type === "schedule"
+            ? "Please provide the details to schedule your appointment."
+            : "Request an appointment in just seconds.";
   return (
-    <div className='max-w-2xl mx-auto p-10'>
-      {type !== 'schedule' && type !== 'cancel' && (
-        <h2 className="text-2xl font-bold text-indigo-600 mb-8"
-        >
-          WeCare
-        </h2>
-      )}
-
-      <h4 className='text-3xl font-bold mb-2'>{type === 'cancel' ? 'Cancel appointment' : 'New Appointment'}</h4>
-      <p className='text-sm mb-8'>{type === 'cancel' || type === 'schedule' ? "Please fill in the details to cancel appointment" : "Request an appontment in just seconds."}</p>
+    <main className='max-w-2xl mx-auto p-10'>
+        <Title title={title} heading={heading} subheading={subheading} />
       <AppointmentForm type={type} patientData={patient} onClose={onClose} />
-      <p className="text-xs">&copy;2024 WeCare</p>
-    </div>
+      <Copyright />
+    </main>
   )
 }
 

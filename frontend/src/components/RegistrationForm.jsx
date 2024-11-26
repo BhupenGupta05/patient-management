@@ -361,24 +361,7 @@ const RegistrationForm = () => {
             <div className='flex flex-col mb-4'>
                 <h3 className="text-xl font-bold mb-4">Consent and Privacy</h3>
 
-                {/* <div className='flex flex-col'>
-                    {consentArray.map((item, idx) => (
-                        <div key={idx}>
-                            <input
-                                type="checkbox"
-                                checked={formFields.consents[idx]}
-                                id='consents'
-                                name='consents'
-                                data-index={idx}
-                                value={item}
-                                onChange={handleChange}
-                                className='' />
-                            <label className="ml-2 text-gray-700">
-                                {item}
-                            </label>
-                        </div>
-                    ))}
-                </div> */}
+
 
                 <CustomInput
     label="Consents"

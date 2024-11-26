@@ -11,7 +11,7 @@ const ActionButtons = ({ patientId, onSchedule, onCancel, disableActions }) => {
         onCancel(patientId)
     }
     return (
-        <div className='flex flex-row gap-2 justify-center items-center w-full'>
+        <div className='flex gap-2 justify-center items-center w-full'>
             <button
                 disabled={disableActions}
                 className={`bg-[#5C8DFF] text-white text-xs border-none px-[6px] py-[2px] rounded-sm cursor-pointer mr-1 

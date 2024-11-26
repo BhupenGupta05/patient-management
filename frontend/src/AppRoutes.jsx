@@ -1,35 +1,59 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
-import Layout from "./layouts/Layout";
-import Registration from "./pages/Registration";
-import Appointment from "./pages/Appointment";
-import Admin from "./pages/Admin";
-import Success from "./pages/Success";
+import { Helmet, HelmetProvider } from "react-helmet-async";
+
+const Home = lazy(() => import("./pages/Home"));
+const Layout = lazy(() => import("./layouts/Layout"));
+const Registration = lazy(() => import("./pages/Registration"));
+const Appointment = lazy(() => import("./pages/Appointment"));
+const Admin = lazy(() => import("./pages/Admin"));
+const Success = lazy(() => import("./pages/Success"));
 
 const AppRoutes = () => {
-    return (
-        <Routes>
-            <Route
-                path="/"
-                element={
-                    <Layout>
-                        <Home />
-                    </Layout>
-                }
-            />
-            <Route path="/patient/registration" element={<Registration />} />
-            <Route path="/patient/:patientId/appointment" element={<Appointment type='create' />} />
-            <Route path="/patient/success" element={<Success />} />
+  return (
+    <HelmetProvider>
+      <div className="min-h-screen bg-gray-50 flex flex-col sm:px-6 lg:px-8">
+        {/* Global SEO Metadata */}
+        <Helmet>
+          <title>WeCare - Your Healthcare Solution</title>
+          <meta name="description" content="Manage your healthcare appointments with ease using WeCare." />
+          <meta name="keywords" content="WeCare, Healthcare, Appointments, Patient Management" />
+          <link rel="canonical" href="https://yourdomain.com" />
+        </Helmet>
 
+        <Suspense fallback={<div className="text-center mt-6">Loading...</div>}>
+          <Routes>
+            {/* Home Route */}
+            <Route
+              path="/"
+              element={
+                <Layout>
+                  <Helmet>
+                    <title>WeCare - Home</title>
+                  </Helmet>
+                  <Home />
+                </Layout>
+              }
+            />
+
+            {/* Other Lazy-loaded Routes */}
+            <Route path="/patient/registration" element={<Registration />} />
+            <Route path="/patient/:patientId/appointment" element={<Appointment type="create" />} />
+            <Route path="/patient/success" element={<Success />} />
             <Route path="/admin" element={<Admin />} />
 
-            {/* WILL CREATE THESE AFTER CREATING DASHBOARD */}
-            <Route path="/admin/:appointmentId/schedule" element={<Admin />} />
-            <Route path="/admin/:appointmentId/cancel" element={<Admin />} />
-            <Route path="*" element={<Navigate to={"/"} />} />
-        </Routes>
-    );
+            {/* Fallback Route */}
+            <Route
+              path="*"
+              element={
+                <Navigate to="/" />
+              }
+            />
+          </Routes>
+        </Suspense>
+      </div>
+    </HelmetProvider>
+  );
 };
 
 export default AppRoutes;

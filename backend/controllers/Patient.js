@@ -10,7 +10,11 @@ const getAllPatients = async (req, res) => {
                     createdAt: -1 
                 } 
             },
-        });
+        }).lean(); // Optimize query by returning plain objects
+
+        if (!patients || patients.length === 0) {
+            return res.status(404).json({ message: "No patients found" });
+        }
 
 
         const filteredAppointmentsPatientData = patients.map((patient) => {
@@ -32,7 +36,7 @@ const getAllPatients = async (req, res) => {
 const checkUserExists = async (req, res) => {
     try {
         const {email} = req.query
-        const user = await Patient.findOne({email});
+        const user = await Patient.findOne({ email }).lean();
 
         if(user) {
             return res.status(200).json({ exists: true, id: user.id })
