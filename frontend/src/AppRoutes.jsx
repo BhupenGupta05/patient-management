@@ -1,6 +1,7 @@
 import React, { Suspense, lazy } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import Spinner from "./components/Spinner";
 
 const Home = lazy(() => import("./pages/Home"));
 const Layout = lazy(() => import("./layouts/Layout"));
@@ -21,7 +22,7 @@ const AppRoutes = () => {
           <link rel="canonical" href="https://yourdomain.com" />
         </Helmet>
 
-        <Suspense fallback={<div className="text-center mt-6">Loading...</div>}>
+        <Suspense fallback={<Spinner />}>
           <Routes>
             {/* Home Route */}
             <Route

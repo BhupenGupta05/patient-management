@@ -181,7 +181,6 @@ const Admin = () => {
         cancelledCount={cancelledCount}
       />
 
-      {/* Responsive table */}
       <div className="overflow-x-auto mt-4">
         <Table
           data={filteredData}
