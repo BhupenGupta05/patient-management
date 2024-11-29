@@ -15,9 +15,10 @@ const Registration = () => {
 
       <div className="bg-white p-6 sm:p-8 rounded-lg shadow-lg w-full max-w-4xl mx-auto mb-6">
         <RegistrationForm />
+        <Copyright />
       </div>
 
-      <Copyright />
+      
     </main>
   );
 };

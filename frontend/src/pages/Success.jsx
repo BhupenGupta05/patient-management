@@ -36,7 +36,7 @@ const Success = () => {
 
       </section>
 
-      <div className="mt-6">
+      <div className="mt-4">
         <Copyright />
       </div>
     </main>

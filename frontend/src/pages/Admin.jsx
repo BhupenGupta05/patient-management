@@ -144,7 +144,7 @@ const Admin = () => {
   }
 
   return (
-    <div className="relative flex flex-col gap-4 m-6">
+    <div className="relative flex flex-col gap-[28px] m-6">
       {showFormModal && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50"
