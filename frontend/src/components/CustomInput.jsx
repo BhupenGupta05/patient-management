@@ -6,38 +6,37 @@ const CustomInput = ({ icon: Icon, label, name, value, onChange, type, placehold
     return (
         <div className="mb-6">
             {type !== 'checkbox' && (
-                <label htmlFor={name} className="block text-gray-700 text-sm font-bold mb-2">
-                {label}
-            </label>
-            ) }
+                <label htmlFor={name} className="block text-gray-700 text-xs sm:text-sm md:text-base font-semibold mb-2">
+                    {label}
+                </label>
+            )}
             {type === 'textarea' ? (
                 <textarea
-                required={required}
-                name={name}
-                id={name}
-                className="w-full h-[80%] p-2 border outline-none bg-transparent border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 placeholder:text-sm"
-                value={value}
-                onChange={onChange}
-                placeholder={placeholder}
-                disabled={disabled}
-            />
+                    required={required}
+                    name={name}
+                    id={name}
+                    className="w-full h-[80%] p-2 border outline-none bg-transparent border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 text-sm sm:text-base md:text-lg"
+                    value={value}
+                    onChange={onChange}
+                    placeholder={placeholder}
+                    disabled={disabled}
+                />
             ) : type === 'phone' ? (
                 <PhoneInput
-                            country={"us"}
-                            value={value}
-                            onChange={(phone) => onChange(phone)}
-                            enableSearch={true}
-                            inputClass="bg-transparent w-full outline-none p-[20px]"
-                            containerClass="w-full"
-                            buttonClass="border-none"
-                            inputProps={{
-                                name: name,
-                                required: required,
-                                placeholder: placeholder,
-                                style: { width: "100%" },
-
-                            }}
-                        />
+                    country={"us"}
+                    value={value}
+                    onChange={(phone) => onChange(phone)}
+                    enableSearch={true}
+                    inputClass="bg-transparent w-full outline-none p-[16px] sm:p-[18px] md:p-[20px] text-xs sm:text-sm md:text-base"
+                    containerClass="w-full"
+                    buttonClass="border-none"
+                    inputProps={{
+                        name: name,
+                        required: required,
+                        placeholder: placeholder,
+                        style: { width: "100%" },
+                    }}
+                />
             ) : type === 'radio' ? (
                 <div className="flex mb-4">
                     {options.map(option => (
@@ -52,7 +51,7 @@ const CustomInput = ({ icon: Icon, label, name, value, onChange, type, placehold
                                 onChange={onChange}
                                 disabled={disabled}
                             />
-                            <span className="ml-2 text-gray-700">
+                            <span className="ml-2 text-gray-700 text-xs sm:text-sm md:text-base">
                                 {option.label.charAt(0).toUpperCase() + option.label.slice(1)}
                             </span>
                         </label>
@@ -73,7 +72,7 @@ const CustomInput = ({ icon: Icon, label, name, value, onChange, type, placehold
                                 disabled={disabled}
                                 className="mr-2"
                             />
-                            <label htmlFor={`${name}-${index}`} className="text-gray-700">
+                            <label htmlFor={`${name}-${index}`} className="text-gray-700 text-xs sm:text-sm md:text-base">
                                 {option}
                             </label>
                         </div>
@@ -81,45 +80,44 @@ const CustomInput = ({ icon: Icon, label, name, value, onChange, type, placehold
                 </div>
             ) : (
                 <div className="flex items-center border border-gray-300 rounded-md px-3 py-2 focus-within:ring-indigo-500 focus-within:border-indigo-500">
-                {Icon && <Icon className="text-gray-500 mr-2" size={20} />}
-                {type === 'select' ? (
-                    <select
-                        required={required}
-                        name={name}
-                        id={name}
-                        className="w-full outline-none bg-transparent"
-                        value={value}
-                        onChange={onChange}
-                        disabled={disabled}
-                    >
-                        <option value="" hidden>
-                            {placeholder || 'Select an option'}
-                        </option>
-                        {options.map((option, index) => (
-                            <option key={index} value={option.value || option}>
-                                {option.label || option}
+                    {Icon && <Icon className="text-gray-500 mr-2" size={20} />}
+                    {type === 'select' ? (
+                        <select
+                            required={required}
+                            name={name}
+                            id={name}
+                            className="w-full outline-none bg-transparent text-xs sm:text-sm md:text-base"
+                            value={value}
+                            onChange={onChange}
+                            disabled={disabled}
+                        >
+                            <option value="" hidden>
+                                {placeholder || 'Select an option'}
                             </option>
-                        ))}
-                    </select>
-                ) : (
-                    <input
-                        required={required}
-                        name={name}
-                        type={type}
-                        id={name}
-                        className="w-full outline-none bg-transparent "
-                        placeholder={placeholder}
-                        value={value}
-                        onChange={onChange}
-                        disabled={disabled}
-                    />
-                )}
-            </div>
+                            {options.map((option, index) => (
+                                <option key={index} value={option.value || option}>
+                                    {option.label || option}
+                                </option>
+                            ))}
+                        </select>
+                    ) : (
+                        <input
+                            required={required}
+                            name={name}
+                            type={type}
+                            id={name}
+                            className="w-full outline-none bg-transparent text-xs sm:text-sm md:text-base"
+                            placeholder={placeholder}
+                            value={value}
+                            onChange={onChange}
+                            disabled={disabled}
+                        />
+                    )}
+                </div>
             )}
             {error && (
-                <p className="text-red-500 text-xs italic mt-1">{error}</p>
+                <p className="text-red-500 text-xs sm:text-sm md:text-base italic mt-1">{error}</p>
             )}
-            
         </div>
     )
 }
