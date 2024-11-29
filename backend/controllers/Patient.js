@@ -10,7 +10,7 @@ const getAllPatients = async (req, res) => {
                     createdAt: -1 
                 } 
             },
-        }).lean(); // Optimize query by returning plain objects
+        }) 
 
         if (!patients || patients.length === 0) {
             return res.status(404).json({ message: "No patients found" });

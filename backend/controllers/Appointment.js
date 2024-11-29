@@ -13,8 +13,7 @@ const getAppointment = async (req, res) => {
         // Sort appointments in descending order of storage timing in the DB
         const latestAppointment = await Appointment.findOne({ patient: patientId })
             .sort({ updatedAt: -1, createdAt: -1 })
-            .lean() // Optimize by returning plain JS objects
-            .select('-__v'); // Exclude unneeded fields like `__v`
+
 
         if (!latestAppointment) {
             return res.status(404).json({ message: "No appointments found for this patient" });

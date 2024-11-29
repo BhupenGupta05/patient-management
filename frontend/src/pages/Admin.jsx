@@ -11,39 +11,32 @@ import { useNavigate } from "react-router-dom";
 import Appointment from "./Appointment";
 import { CalendarCheck2, Hourglass, TriangleAlert, HelpCircle } from "lucide-react";
 import StatusButton from "../components/StatusButton";
-
-
-
+import Spinner from "../components/Spinner";
 
 const Admin = () => {
-  const navigate = useNavigate()
-  const [showFormModal, setShowFormModal] = useState(false)
-  const [selectedPatient, setSelectedPatient] = useState(null)
+  const navigate = useNavigate();
+  const [showFormModal, setShowFormModal] = useState(false);
+  const [selectedPatient, setSelectedPatient] = useState(null);
   const [appointmentType, setAppointmentType] = useState(null);
 
-  // DISPLAY APPOINTMENT ID IN URL
   const handleScheduleAppointment = (patient) => {
-    // console.log("SCHEDULE");
-    navigate(`/admin/${patient.appointmentId}/schedule`)
-
-    setSelectedPatient(patient)
+    navigate(`/admin/${patient.appointmentId}/schedule`);
+    setSelectedPatient(patient);
     setAppointmentType("schedule");
-    setShowFormModal(true)
-  }
+    setShowFormModal(true);
+  };
 
   const handleCancelAppointment = (patient) => {
-    // console.log("CANCEL");
-    navigate(`/admin/${patient.appointmentId}/cancel`)
-
-    setSelectedPatient(patient)
+    navigate(`/admin/${patient.appointmentId}/cancel`);
+    setSelectedPatient(patient);
     setAppointmentType("cancel");
-    setShowFormModal(true)
-  }
+    setShowFormModal(true);
+  };
 
   const closeModal = () => {
-    setShowFormModal(false)
-    navigate('/admin')
-  }
+    setShowFormModal(false);
+    navigate("/admin");
+  };
 
   const defaultColDef = useMemo(
     () => ({
@@ -55,14 +48,14 @@ const Admin = () => {
   );
 
   const columnDefs = [
-    { headerName: "#", field: "patientId" },
-    { headerName: "Patient", field: "name" },
-    { 
-      headerName: "Status", 
+    { headerName: "#", field: "patientId", minWidth: 100, },
+    { headerName: "Patient", field: "name", minWidth: 150, flex: 1 },
+    {
+      headerName: "Status",
       field: "status",
+      minWidth: 120,
       cellRenderer: (params) => {
-        const status = params.value
-
+        const status = params.value;
         const statusConfig = {
           pending: {
             styleClass: "bg-yellow-200 text-yellow-800",
@@ -70,53 +63,47 @@ const Admin = () => {
           },
           scheduled: {
             styleClass: "bg-green-200 text-green-800",
-            Icon: CalendarCheck2, 
+            Icon: CalendarCheck2,
           },
           cancelled: {
             styleClass: "bg-red-200 text-red-800",
             Icon: TriangleAlert,
           },
-        }
-
-        const { styleClass, Icon } = statusConfig[status] || {
-          styleClass: "bg-gray-200 text-gray-800",
-          Icon: HelpCircle, 
         };
 
-        return <StatusButton text={status} Icon={Icon} styleClass={styleClass} />
+        const { styleClass, Icon } =
+          statusConfig[status] || {
+            styleClass: "bg-gray-200 text-gray-800",
+            Icon: HelpCircle,
+          };
+
+        return <StatusButton text={status} Icon={Icon} styleClass={styleClass} />;
       },
-      cellStyle: { display: 'flex', alignItems: 'center', justifyContent: 'center' },
+      cellStyle: { display: "flex", alignItems: "center", justifyContent: "center" },
     },
-    { headerName: "Appointment", field: "appointments" },
-    { headerName: "Doctor", field: "physician" },
+    { headerName: "Appointment", field: "appointments", minWidth: 150, },
+    { headerName: "Doctor", field: "physician", minWidth: 150, },
     {
       headerName: "Action",
       field: "action",
+      minWidth: 150,
       cellRenderer: (params) => {
-        const patient = params.data
-        const isPending = patient.status === 'pending'
-        
+        const patient = params.data;
+        const isPending = patient.status === "pending";
 
         return (
           <ActionButtons
             patientId={patient.patientId}
             onSchedule={() => handleScheduleAppointment(patient)}
             onCancel={() => handleCancelAppointment(patient)}
-            disableActions={!isPending} 
-            />
-
-            
-            
-
-
-        )
+            disableActions={!isPending}
+          />
+        );
       },
-      cellStyle: { display: 'flex', justifyContent: 'center' },
+      cellStyle: { display: "flex", justifyContent: "center" },
     },
   ];
 
-
-  // FETCH PATIENTS
   const { data, isLoading } = useQuery({
     queryKey: ["patients"],
     queryFn: getAllPatients,
@@ -125,17 +112,13 @@ const Admin = () => {
     },
   });
 
-
-
   const filteredData = useMemo(() => {
-    console.log(data);
-    
     if (data) {
       return data.map((patient) => {
-        const firstAppointment = patient.appointments; 
+        const firstAppointment = patient.appointments;
 
         return {
-          appointmentId: firstAppointment ? firstAppointment.id : null, 
+          appointmentId: firstAppointment ? firstAppointment.id : null,
           patientId: patient._id,
           name: patient.name,
           status: firstAppointment ? firstAppointment.status : "No status",
@@ -144,7 +127,7 @@ const Admin = () => {
             : "No appointment date",
           physician: firstAppointment ? firstAppointment.physician : "N/A",
           reason: firstAppointment.reason,
-          comments: firstAppointment.comments
+          comments: firstAppointment.comments,
         };
       });
     }
@@ -152,17 +135,16 @@ const Admin = () => {
     return [];
   }, [data]);
 
-
-  const pendingCount = filteredData.filter((patient) => patient.status === 'pending').length
-  const scheduledCount = filteredData.filter((patient) => patient.status === 'scheduled').length
-  const cancelledCount = filteredData.filter((patient) => patient.status === 'cancelled').length
+  const pendingCount = filteredData.filter((patient) => patient.status === "pending").length;
+  const scheduledCount = filteredData.filter((patient) => patient.status === "scheduled").length;
+  const cancelledCount = filteredData.filter((patient) => patient.status === "cancelled").length;
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Spinner />;
   }
 
   return (
-    <div className="relative flex flex-col gap-8 m-6">
+    <div className="relative flex flex-col gap-4 m-6">
       {showFormModal && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50"
@@ -183,29 +165,31 @@ const Admin = () => {
               patient={selectedPatient}
               onClose={closeModal}
             />
-
           </div>
         </div>
       )}
 
-
-
-
-
       <Title
         title="WeCare"
         heading="Welcome"
-        subheading="Start the day with managing appointments" />
+        subheading="Start the day with managing appointments"
+      />
+
       <FactCards
         pendingCount={pendingCount}
         scheduledCount={scheduledCount}
-        cancelledCount={cancelledCount} />
-
-      <Table
-        data={filteredData}
-        columnDefs={columnDefs}
-        defaultColDef={defaultColDef}
+        cancelledCount={cancelledCount}
       />
+
+      {/* Responsive table */}
+      <div className="overflow-x-auto mt-4">
+        <Table
+          data={filteredData}
+          columnDefs={columnDefs}
+          defaultColDef={defaultColDef}
+        />
+      </div>
+
       <Copyright />
     </div>
   );

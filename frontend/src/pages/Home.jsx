@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import { User, Mail } from "lucide-react";
-import PhoneInput from "react-phone-input-2";
-import "react-phone-input-2/lib/style.css";
 import { useQuery } from "@tanstack/react-query";
 import { checkUserExistence } from "../services/patientRequests";
 import CustomButton from "../components/CustomButton";
