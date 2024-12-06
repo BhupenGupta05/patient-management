@@ -4,7 +4,7 @@ import 'react-phone-input-2/lib/style.css';
 
 const CustomInput = ({ icon: Icon, label, name, value, onChange, type, placeholder, required=true, options=[], disabled=false, error }) => {
     return (
-        <div className="mb-6">
+        <div className="mb-2 sm:mb-4 md:mb-6">
             {type !== 'checkbox' && (
                 <label htmlFor={name} className="block text-gray-700 text-xs sm:text-sm md:text-base font-semibold mb-2">
                     {label}
@@ -15,21 +15,21 @@ const CustomInput = ({ icon: Icon, label, name, value, onChange, type, placehold
                     required={required}
                     name={name}
                     id={name}
-                    className="w-full h-[80%] p-2 border outline-none bg-transparent border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 text-sm sm:text-base md:text-lg"
+                    className="w-full h-[80%] p-2 border outline-none bg-transparent border-gray-300 text-xs sm:text-sm md:text-base rounded-md focus:ring-indigo-500 focus:border-indigo-500"
                     value={value}
                     onChange={onChange}
                     placeholder={placeholder}
                     disabled={disabled}
                 />
-            ) : type === 'phone' ? (
+            ) : type === 'phone' ? ( // input styles not working
                 <PhoneInput
                     country={"us"}
                     value={value}
                     onChange={(phone) => onChange(phone)}
                     enableSearch={true}
-                    inputClass="bg-transparent w-full outline-none p-[16px] sm:p-[18px] md:p-[20px] text-xs sm:text-sm md:text-base"
-                    containerClass="w-full"
-                    buttonClass="border-none"
+                    inputClass="bg-transparent w-full outline-none p-[16px] sm:p-[18px] md:p-[20px] text-xs sm:text-sm md:text-md lg:text-lg"
+                    containerClass="w-full "
+                    buttonClass="border-none "
                     inputProps={{
                         name: name,
                         required: required,
@@ -38,7 +38,7 @@ const CustomInput = ({ icon: Icon, label, name, value, onChange, type, placehold
                     }}
                 />
             ) : type === 'radio' ? (
-                <div className="flex mb-4">
+                <div className="flex mb-2">
                     {options.map(option => (
                         <label className="mr-4 flex items-center" key={option.value}>
                             <input

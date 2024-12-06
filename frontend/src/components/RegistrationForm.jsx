@@ -136,7 +136,7 @@ const RegistrationForm = () => {
           placeholder="John Doe"
         />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-[4px] sm:gap-4">
           <CustomInput
             icon={Mail}
             label="Email"
@@ -198,6 +198,7 @@ const RegistrationForm = () => {
             onChange={handleChange}
             type="text"
             placeholder="Guardian's name"
+            required={false}
           />
           <CustomInput
             label="Emergency Contact Number"
@@ -205,11 +206,12 @@ const RegistrationForm = () => {
             value={formFields.emergencyContact}
             onChange={handleEmergencyPhoneChange}
             type="phone"
+            required={false}
           />
         </div>
       </div>
 
-      <div className="flex flex-col">
+      <div className="flex flex-col gap-2">
         <h3 className="text-lg sm:text-xl font-semibold mb-4">Medical Information</h3>
         <CustomInput
           label="Primary care physician"
@@ -221,7 +223,7 @@ const RegistrationForm = () => {
           options={physicians.map(doctor => ({ label: doctor, value: doctor }))}
         />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-[12px] sm:gap-6">
           <CustomInput
             name="allergies"
             label="Allergies (if any)"
@@ -261,7 +263,7 @@ const RegistrationForm = () => {
         </div>
       </div>
 
-      <div className="flex flex-col">
+      <div className="flex flex-col gap-2">
         <h3 className="text-lg sm:text-xl font-semibold mb-4">Identification and Verification</h3>
         <CustomInput
           label="Identification Type"
@@ -296,7 +298,7 @@ const RegistrationForm = () => {
       </div>
 
       <div className="flex justify-center w-full mb-6">
-        <CustomButton className="w-full">Submit and continue</CustomButton>
+        <CustomButton className="w-full text-xs sm:text-sm md:text-base">Submit and continue</CustomButton>
       </div>
     </form>
   );

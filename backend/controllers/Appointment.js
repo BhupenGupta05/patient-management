@@ -1,19 +1,20 @@
-const { default: mongoose } = require('mongoose')
+const mongoose = require('mongoose')
 const Appointment = require('../models/Appointment')
 const Patient = require('../models/Patient')
 
 const getAppointment = async (req, res) => {
-    try {
-        const {patientId} = req.body
+    
+    const { patientId } = req.params;
 
-        if(!patientId || !mongoose.Types.ObjectId.isValid(patientId)) {
+    try {
+        if (!patientId || !mongoose.Types.ObjectId.isValid(patientId)) {
             return res.status(400).json({ message: "Invalid or missing patient ID" });
         }
 
         // Sort appointments in descending order of storage timing in the DB
         const latestAppointment = await Appointment.findOne({ patient: patientId })
-            .sort({ updatedAt: -1, createdAt: -1 })
-
+            .sort({ updatedAt: -1, createdAt: -1 });
+        
 
         if (!latestAppointment) {
             return res.status(404).json({ message: "No appointments found for this patient" });
@@ -22,9 +23,10 @@ const getAppointment = async (req, res) => {
         return res.status(200).json(latestAppointment);
     } catch (error) {
         console.log(error);
-        return res.status(500).json({ message: "Error fetching appointment"})
+        return res.status(500).json({ message: "Error fetching appointment" });
     }
-}
+};
+
 
 const createAppointment = async (req, res) => {
     try {
@@ -60,8 +62,9 @@ const createAppointment = async (req, res) => {
 const updateAppointment = async (req, res) => {
     try {
         console.log("REQ BODY: ", req.body);
+        const { appointmentId } = req.params;
 
-        const { appointmentId, status, cancellationReason } = req.body; 
+        const { status, cancellationReason } = req.body; 
 
         if (!appointmentId || !mongoose.Types.ObjectId.isValid(appointmentId)) {
             return res.status(400).json({ message: "Invalid or missing appointment ID" });

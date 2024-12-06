@@ -137,11 +137,11 @@ const AppointmentForm = ({ type, patientData, onClose }) => {
 
 
     return (
-        <form onSubmit={handleSubmit} className='bg-opacity-50 backdrop-blur-sm z-50 max-w-lg relative w-[90%]'>
+        <form onSubmit={handleSubmit} className='bg-opacity-50 backdrop-blur-sm z-50 max-w-3xl mx-auto p-1 relative'>
             {type !== 'cancel' && (
-                <div className='flex flex-col gap-6 mb-6'>
+                <div className='flex flex-col mb-2'>
 
-                    <div className='flex flex-col'>
+                    <div className='flex flex-col gap-1'>
 
                         <CustomInput
                             name="physician"
@@ -160,7 +160,7 @@ const AppointmentForm = ({ type, patientData, onClose }) => {
                             disabled={isReadOnly} />
                     </div>
 
-                    <div className='flex flex-row gap-4'>
+                    <div className='flex flex-col sm:flex-row gap-[12px]'>
 
                         <CustomInput
                             name="reason"
@@ -197,8 +197,8 @@ const AppointmentForm = ({ type, patientData, onClose }) => {
             )}
 
 
-            <div className="flex justify-center w-full mb-6">
-                <CustomButton className="w-full" >{buttonLabel}</CustomButton>
+            <div className="flex justify-center w-full mt-8 mb-6">
+                <CustomButton className="w-full text-xs sm:text-sm md:text-md lg:text-lg" >{buttonLabel}</CustomButton>
             </div>
         </form>
     )

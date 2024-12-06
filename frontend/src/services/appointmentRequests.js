@@ -2,7 +2,7 @@ import { apiBaseUrl } from "../constants";
 import axios from "axios";
 
 export const createAppointment = async (newAppointment) => {
-  const { data } = await axios.post(`${apiBaseUrl}/patient/${newAppointment.patientId}/appointment`, newAppointment)
+  const { data } = await axios.post(`${apiBaseUrl}/appointments/${newAppointment.patientId}/appointment`, newAppointment)
   return data
 }
 

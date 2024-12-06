@@ -1,4 +1,29 @@
 const Patient = require("../models/Patient");
+const mongoose = require('mongoose')
+
+const getPatient = async (req, res) => {
+    const { patientId } = req.params;
+
+    // THIS IS CAUSING TROUBLE
+    if (!patientId || !mongoose.Types.ObjectId.isValid(patientId)) {
+        return res.status(400).json({ message: "Invalid patient ID" });
+    }
+
+    try {
+        const patient = await Patient.findById(patientId);
+
+        if (!patient) {
+            return res.status(404).json({ message: "Patient not found" });
+        }
+
+        return res.status(200).json(patient);
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: "Error fetching patient" });
+    }
+};
+
 
 const getAllPatients = async (req, res) => {
     try {
@@ -36,7 +61,8 @@ const getAllPatients = async (req, res) => {
 const checkUserExists = async (req, res) => {
     try {
         const {email} = req.query
-        const user = await Patient.findOne({ email }).lean();
+        
+        const user = await Patient.findOne({ email })
 
         if(user) {
             return res.status(200).json({ exists: true, id: user.id })
@@ -94,4 +120,4 @@ const addPatient = async (req, res) => {
     }
 }
 
-module.exports = { getAllPatients, addPatient, checkUserExists }
+module.exports = { getPatient, getAllPatients, addPatient, checkUserExists }

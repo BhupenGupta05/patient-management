@@ -12,14 +12,13 @@ const CustomeDateTimePicker = ({ label, selectedDate, onDateChange, disabled }) 
 
     return (
         <div className='mb-6'>
-            <label className="block text-gray-700 text-sm font-bold mb-2">{label}</label>
+            <label className="block text-gray-700 text-xs sm:text-sm md:text-base font-bold mb-2">{label}</label>
             <div
-                className='flex w-full py-2 px-3 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500'
+                className='flex items-center w-full py-2 px-3 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500'
                 onClick={handleClick}
             >
                 <Calendar
-                    size={20}
-                    className='text-gray-500 mr-2 cursor-pointer'
+                    className='text-gray-500 mr-2 cursor-pointer w-[22px] h-[22px]'
                 />
                 <DatePicker
                     showTimeSelect
@@ -31,7 +30,7 @@ const CustomeDateTimePicker = ({ label, selectedDate, onDateChange, disabled }) 
                         setOpen(false);
                     }}
                     dateFormat="MMMM d, yyyy h:mmaa"
-                    className='outline-none'
+                    className='outline-none text-xs sm:text-sm md:text-md w-[90%] '
                     open={open}
                     onClickOutside={() => setOpen(false)}
                     disabled={disabled}

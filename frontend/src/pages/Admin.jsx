@@ -151,12 +151,12 @@ const Admin = () => {
           onClick={closeModal}
         >
           <div
-            className="bg-white rounded-lg shadow-lg p-2 w-full max-w-md mx-auto relative flex justify-center"
+            className="bg-white rounded-lg shadow-lg w-full max-w-md mx-4 sm:mx-6 md:mx-8 lg:mx-10 relative flex justify-center py-2 md:py-4"
             onClick={(e) => e.stopPropagation()}
           >
             <button
               onClick={closeModal}
-              className="absolute top-4 right-4 text-gray-600 hover:text-gray-800"
+              className="absolute top-10 right-10 text-gray-600 hover:text-gray-800"
             >
               &times;
             </button>
@@ -170,9 +170,12 @@ const Admin = () => {
       )}
 
       <Title
-        title="WeCare"
+        title="NurtureMed"
         heading="Welcome"
         subheading="Start the day with managing appointments"
+        titleClassName="text-md md:text-xl lg:text-2xl font-bold text-indigo-600 mb-4"
+        headingClassName="text-2xl lg:text-3xl font-bold mb-1"
+        subheadingClassName="text-wrap text-xs sm:text-sm lg:text-md mb-6"
       />
 
       <FactCards

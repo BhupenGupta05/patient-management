@@ -49,10 +49,14 @@ const Home = () => {
         <div className="min-h-screen flex flex-col justify-center items-center">
             <div className="flex flex-col justify-center items-center bg-white p-8 rounded-lg shadow-md w-full max-w-md">
                 <Title
-                    className="text-center"
-                    title="WeCare"
-                    heading="Hi there"
-                    subheading="Let's get started with signing you up!" />
+                title="NurtureMed"
+                heading="Hi there"
+                subheading="Let's get started with signing you up!"
+                className="text-center"
+                titleClassName="text-md md:text-lg md:mb-4 lg:text-xl font-bold text-indigo-600 mb-2"
+                headingClassName="text-xl sm:text-xl md:text-2xl lg:text-3xl font-bold mb-1"
+                subheadingClassName="text-wrap text-xs sm:text-sm md:text-md mb-6"
+                     />
 
                 <form onSubmit={handleSubmit} className="w-full">
                     {/* Name Field */}
@@ -64,7 +68,6 @@ const Home = () => {
                         onChange={handleChange}
                         type="text"
                         placeholder="John Doe"
-                        required // added required for accessibility
                     />
 
                     {/* Email Field */}
@@ -76,7 +79,6 @@ const Home = () => {
                         onChange={handleChange}
                         type="email"
                         placeholder="xyz@gmail.com"
-                        required // added required for accessibility
                     />
 
                     {/* Phone Number Field */}
@@ -86,17 +88,17 @@ const Home = () => {
                         value={formFields.phoneNumber}
                         onChange={handlePhoneChange}
                         type="phone"
-                        required />
+                    />
 
                     {/* Submit Button */}
                     <div className="flex justify-center items-center w-full mb-8">
-                        <CustomButton className="w-full">Get Started</CustomButton>
+                        <CustomButton className="w-full mt-6 text-xs sm:text-sm md:text-md lg:text-lg">Get Started</CustomButton>
                     </div>
                 </form>
 
                 <div className="flex justify-between w-full">
                     <Copyright />
-                    <Link to="/admin" className="text-sm mx-4 text-indigo-600">
+                    <Link to="/admin" className="text-xs md:text-sm mx-4 text-indigo-600">
                         Admin
                     </Link>
                 </div>

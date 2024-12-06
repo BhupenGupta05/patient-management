@@ -15,7 +15,6 @@
     @apply bg-indigo-600 text-white px-6 py-2 rounded-md hover:bg-indigo-700 transition-all duration-300
 }
 
-
 /* Remove outline and border for focused cells */
 .ag-theme-quartz .ag-cell:focus,
 .ag-theme-quartz .ag-cell:active,

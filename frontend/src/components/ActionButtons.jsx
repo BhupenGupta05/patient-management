@@ -14,16 +14,16 @@ const ActionButtons = ({ patientId, onSchedule, onCancel, disableActions }) => {
         <div className='flex gap-2 justify-center items-center w-full'>
             <button
                 disabled={disableActions}
-                className={`bg-[#5C8DFF] text-white text-xs border-none px-[6px] py-[2px] rounded-sm cursor-pointer mr-1 
-                    ${disableActions ? ' cursor-not-allowed' : ''}`}
+                className={`bg-[#5C8DFF] text-white text-xs border-none px-[6px] py-[2px] rounded-sm mr-1 
+                    ${disableActions ? ' cursor-not-allowed' : ' cursor-pointer'}`}
                 onClick={handleScheduleClick}>
                 Schedule
             </button>
 
             <button
                 disabled={disableActions}
-                className={`bg-[#FF6F61] text-white text-xs border-none px-[6px] py-[2px] rounded-sm cursor-pointer mr-1
-                    ${disableActions ? 'cursor-not-allowed' : ''}`}
+                className={`bg-[#FF6F61] text-white text-xs border-none px-[6px] py-[2px] rounded-sm mr-1
+                    ${disableActions ? ' cursor-not-allowed' : ' cursor-pointer'}`}
                 onClick={handleCancelClick}>
                 Cancel
             </button>

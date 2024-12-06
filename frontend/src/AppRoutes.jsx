@@ -7,6 +7,7 @@ const Home = lazy(() => import("./pages/Home"));
 const Layout = lazy(() => import("./layouts/Layout"));
 const Registration = lazy(() => import("./pages/Registration"));
 const Appointment = lazy(() => import("./pages/Appointment"));
+const AppointmentForm = lazy(() => import("./components/AppointmentForm"))
 const Admin = lazy(() => import("./pages/Admin"));
 const Success = lazy(() => import("./pages/Success"));
 
@@ -16,9 +17,9 @@ const AppRoutes = () => {
       <div className="min-h-screen bg-gray-50 flex flex-col sm:px-6 lg:px-8">
         {/* Global SEO Metadata */}
         <Helmet>
-          <title>WeCare - Your Healthcare Solution</title>
-          <meta name="description" content="Manage your healthcare appointments with ease using WeCare." />
-          <meta name="keywords" content="WeCare, Healthcare, Appointments, Patient Management" />
+          <title>NurtureMed - Your Healthcare Solution</title>
+          <meta name="description" content="Manage your healthcare appointments with ease using NurtureMed." />
+          <meta name="keywords" content="NurtureMed, Healthcare, Appointments, Patient Management" />
           <link rel="canonical" href="https://yourdomain.com" />
         </Helmet>
 
@@ -30,7 +31,7 @@ const AppRoutes = () => {
               element={
                 <Layout>
                   <Helmet>
-                    <title>WeCare - Home</title>
+                    <title>NurtureMed - Home</title>
                   </Helmet>
                   <Home />
                 </Layout>
@@ -42,6 +43,10 @@ const AppRoutes = () => {
             <Route path="/patient/:patientId/appointment" element={<Appointment type="create" />} />
             <Route path="/patient/success" element={<Success />} />
             <Route path="/admin" element={<Admin />} />
+
+            <Route path="/admin/:appointmentId/schedule" element={<Admin />} />
+            <Route path="/admin/:appointmentId/cancel" element={<Admin />} />
+
 
             {/* Fallback Route */}
             <Route

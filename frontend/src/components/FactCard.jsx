@@ -6,11 +6,11 @@ const FactCard = ({ icon, text, aggregate }) => {
 
       <div className="flex flex-row gap-4 items-center text-lg sm:text-xl md:text-2xl">
         {icon}
-        <span className="text-base sm:text-lg md:text-xl">{aggregate}</span>
+        <span className="text-xs sm:text-sm md:text-md lg:text-lg">{aggregate}</span>
       </div>
 
 
-      <p className="text-sm sm:text-base md:text-lg font-medium">{text}</p>
+      <p className="text-xs sm:text-sm md:text-md lg:text-lg font-medium">{text}</p>
     </div>
   );
 };
