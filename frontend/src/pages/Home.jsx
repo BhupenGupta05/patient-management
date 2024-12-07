@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import { User, Mail } from "lucide-react";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { checkUserExistence } from "../services/patientRequests";
 import CustomButton from "../components/CustomButton";
 import useDebounce from "../hooks/Debounce";
 import Copyright from "../components/Copyright";
 import Title from "../components/Title";
 import CustomInput from "../components/CustomInput";
+import {login} from '../services/loginRequests'
 
 const Home = () => {
     const initialFormFields = {
@@ -17,6 +18,8 @@ const Home = () => {
     };
 
     const [formFields, setFormFields] = useState(initialFormFields);
+    const [showPasscodeModal, setShowPasscodeModal] = useState(false); 
+    const [passcode, setPasscode] = useState(""); 
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -35,8 +38,13 @@ const Home = () => {
         enabled: !!debouncedEmail
     });
 
+
     const handleSubmit = (e) => {
         e.preventDefault();
+        if (isLoading) {
+            return;
+        }
+
         if (data?.exists) {
             const patientId = data.id;
             navigate(`/patient/${patientId}/appointment`);
@@ -44,6 +52,33 @@ const Home = () => {
             navigate("/patient/registration", { state: formFields });
         }
     };
+
+    const handlePasscodeChange = (e) => {
+        setPasscode(e.target.value)
+    }
+
+    const {mutate, isLoading: isPassCodeLoading} = useMutation({
+        mutationFn: (passcode) => login(passcode),
+        onSuccess: (data) => {
+            console.log("DATA: ",data);
+            
+            localStorage.setItem("adminToken", data.token);
+            navigate("/admin");
+            setShowPasscodeModal(false);
+        },
+        onError: () => {
+            setError("Invalid passcode");
+        },
+    })
+
+    const handlePassCodeSubmit = async (e) => {
+        e.preventDefault();
+        mutate(passcode);
+    }
+
+    const handleAdminClick = () => {
+        setShowPasscodeModal(true); 
+    }
 
     return (
         <div className="min-h-screen flex flex-col justify-center items-center">
@@ -98,11 +133,41 @@ const Home = () => {
 
                 <div className="flex justify-between w-full">
                     <Copyright />
-                    <Link to="/admin" className="text-xs md:text-sm mx-4 text-indigo-600">
+                    <Link onClick={handleAdminClick} className="text-xs md:text-sm mx-4 text-indigo-600">
                         Admin
                     </Link>
                 </div>
             </div>
+
+            {/* Admin Passcode Modal */}
+            {showPasscodeModal && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+                    <div className="bg-white p-6 rounded-lg w-96 mx-4">
+                        <h3 className="font-semibold mb-4 text-sm sm:text-md md:text-lg">Enter Admin Passcode</h3>
+                        <input
+                            type="password"
+                            value={passcode}
+                            onChange={handlePasscodeChange}
+                            className="w-full p-2 border border-gray-300 rounded-md mb-4 text-xs sm:text-sm lg:text-md placeholder:text-sm"
+                            placeholder="Enter passcode"
+                        />
+                        <div className="flex justify-between">
+                            <button
+                                onClick={handlePassCodeSubmit}
+                                className="bg-indigo-600 text-white px-4 py-2 rounded-md text-xs sm:text-sm lg:text-md"
+                            >
+                                Submit
+                            </button>
+                            <button
+                                onClick={() => setShowPasscodeModal(false)}
+                                className="bg-red-500 text-white px-4 py-2 rounded-md text-xs sm:text-sm lg:text-md"
+                            >
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

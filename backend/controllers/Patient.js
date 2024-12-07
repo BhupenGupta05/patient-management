@@ -4,7 +4,6 @@ const mongoose = require('mongoose')
 const getPatient = async (req, res) => {
     const { patientId } = req.params;
 
-    // THIS IS CAUSING TROUBLE
     if (!patientId || !mongoose.Types.ObjectId.isValid(patientId)) {
         return res.status(400).json({ message: "Invalid patient ID" });
     }
@@ -26,6 +25,9 @@ const getPatient = async (req, res) => {
 
 
 const getAllPatients = async (req, res) => {
+    if(req.user.role !== 'admin') {
+        return res.status(403).json({ message: 'You do not have permission to access this page' });
+    }
     try {
         const patients = await Patient.find({}).populate({
             path: 'appointments',

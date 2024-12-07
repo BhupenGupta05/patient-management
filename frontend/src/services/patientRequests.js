@@ -2,7 +2,14 @@ import { apiBaseUrl } from "../constants";
 import axios from "axios";
 
 export const getAllPatients = async () => {
-    const {data} = await axios.get(`${apiBaseUrl}/admin`)
+    const token = localStorage.getItem("adminToken");
+
+    const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    const {data} = await axios.get(`${apiBaseUrl}/admin`, config)
     return data
 }
 
