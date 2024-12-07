@@ -60,7 +60,6 @@ const Home = () => {
     const {mutate, isLoading: isPassCodeLoading} = useMutation({
         mutationFn: (passcode) => login(passcode),
         onSuccess: (data) => {
-            console.log("DATA: ",data);
             
             localStorage.setItem("adminToken", data.token);
             navigate("/admin");

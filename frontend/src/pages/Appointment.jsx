@@ -20,8 +20,7 @@ const Appointment = ({ type, patient, onClose }) => {
 
     return (
         <main className={`flex justify-center items-center ${type === 'create' ? 'bg-gray-50 min-h-screen' : ' ' } mx-4`}>
-            {/* White Box */}
-            <div className={`bg-white w-full max-w-3xl mx-4 rounded-lg ${type === 'create' ? 'shadow-lg' : 'p-2'}`}>
+            <div className={`bg-white w-full max-w-3xl mx-4 rounded-lg ${type === 'create' ? 'shadow-lg p-6' : 'p-2'}`}>
                 <Title
                     title={title}
                     heading={heading}

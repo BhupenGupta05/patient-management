@@ -1,4 +1,5 @@
 export const apiBaseUrl = "http://localhost:5000/api"
+// export const apiBaseUrl = "https://patient-management-backend-6r91.onrender.com/api"
 
 export const identificationTypes = [
     "Aadhar Card",
